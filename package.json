@@ -1,26 +1,26 @@
 {
-  "name": "pot-patrol",
+  "name": "loginform",
   "version": "1.0.0",
-  "description": "### [Featured on Freebiesbug](http://freebiesbug.com/psd-freebies/global-futuristic-one-page-portfolio-psd-html/)",
+  "description": "Once you clone it make sure you run 'npm install' command to install all libraries mention in package.json file.",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Haloking1212/Pot-Patrol.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Haloking1212/Pot-Patrol/issues"
-  },
-  "homepage": "https://github.com/Haloking1212/Pot-Patrol#readme",
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "body-parser": "^1.19.0",
     "express.js": "^1.0.0",
-    "knex": "^2.4.2",
-    "nodemon": "^2.0.22",
-    "pg": "^8.10.0"
-  }
+    "knex": "^0.95.6",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haloking1212/fullstack-login-form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Haloking1212/fullstack-login-form/issues"
+  },
+  "homepage": "https://github.com/Haloking1212/fullstack-login-form#readme"
 }

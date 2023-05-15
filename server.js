@@ -1,45 +1,43 @@
-const express = require("express");// creates the server
-const path = require("path");// allows us to know our html and css file location
-const bodyParser = require("body-parser");// allows us to send and recieve data
-const knex = require("knex");// allows us to access our database
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const knex = require('knex');
 
 const db = knex({
-    client: "pg",
+    client: 'pg',
     connection: {
-        host: "127.0.0.1",
-        user: "postgres",
-        password: "Brittring19",
-        database: "loginform",
+        host: '127.0.0.1',
+        user: 'postgres',
+        password: 'brittring19',
+        database: 'loginform'
     }
 })
 
 const app = express();
 
-let initalPath = path.join(__dirname)
+let intialPath = path.join(__dirname, "public");
 
 app.use(bodyParser.json());
-app.use(express.static(initalPath));
+app.use(express.static(intialPath));
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(initalPath, "index.html"));
-});
+app.get('/', (req, res) => {
+    res.sendFile(path.join(intialPath, "index.html"));
+})// gets landing page "index.html"
 
-app.get("/login", (req, res) => {
-    res.sendFile(path.join(initalPath, "login.html"));
-}); // creates login url path
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(intialPath, "login.html"));
+})// gets login page
 
-app.get("/signup", (req, res) => {
-    res.sendFile(path.join(initalPath, "signup.html"));
-}); // creates signup url path
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(intialPath, "register.html"));
+})// gets register page
 
-
-// post to the database
-app.post("/signup-user", (req, res) => {
+app.post('/register-user', (req, res) => {
     const { name, email, password } = req.body;
 
-    if (!name.length || !email.length || !password.length) {
-        res.json("fill all the fields");
-    } else {
+    if(!name.length || !email.length || !password.length){
+        res.json('fill all the fields');
+    } else{
         db("users").insert({
             name: name,
             email: email,
@@ -47,16 +45,34 @@ app.post("/signup-user", (req, res) => {
         })
         .returning(["name", "email"])
         .then(data => {
-            res.json([0])
+            res.json(data[0])
         })
         .catch(err => {
-            if(err.detail.includes("already exists")) {
-                res.json("email already exists")
+            if(err.detail.includes('already exists')){
+                res.json('email already exists');
             }
         })
     }
 })
+// post user
+app.post('/login-user', (req, res) => {
+    const { email, password } = req.body;
 
+    db.select('name', 'email')
+    .from('users')
+    .where({
+        email: email,
+        password: password
+    })
+    .then(data => {
+        if(data.length){
+            res.json(data[0]);
+        } else{
+            res.json('email or password is incorrect');
+        }
+    })
+})
+// creates server on localhost:3000
 app.listen(3000, (req, res) => {
-    console.log("listening on port 3000...")
-});
+    console.log('listening on port 3000......')
+})
