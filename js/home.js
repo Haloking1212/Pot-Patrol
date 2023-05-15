@@ -6,7 +6,7 @@ window.onload = () => {
     } else{
         greeting.innerHTML = `hello ${sessionStorage.name}`;
     }
-}
+}// sends user to login if not logged in
 
 const logOut = document.querySelector('.logout');
 
