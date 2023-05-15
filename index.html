@@ -172,7 +172,25 @@
           <li class="l-section section">
             <!--REPORT SECTION-->
 
+<div id="form-container">
+                <a class="close-btn" href="index.html">&times;</a>
 
+              <form action="pothole-report.php" method="post" enctype="multipart/form-data">
+                  <label for="location">Location:</label>
+                  <input type="text" id="location" name="location" required>
+                    <br>
+                        <label for="size">Size (if known):</label>
+                        <input type="text" id="size" name="size">
+                    <br>
+                        <label for="details">Details:</label>
+                        <textarea id="details" name="details"></textarea>
+                        <br>
+                        <label for="image">Image:</label>
+                        <input type="file" id="image" name="image" accept="image/*" required>
+                    <br>
+                        <input type="submit" value="Submit">
+                </form>
+              </div>
 
 
 
